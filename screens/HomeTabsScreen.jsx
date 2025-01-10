@@ -22,7 +22,7 @@ import { TouchableRipple } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import { useTheme, Avatar } from "react-native-paper";
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const HomeTabsScreen = () => {
   const { colors } = useTheme();

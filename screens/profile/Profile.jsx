@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "react-native-paper";
 import { useSelector } from "react-redux";
-import { CameraAlt } from "react-native-vector-icons/MaterialIcons";
+import { Header } from "../../micro-components";
 
 const Profile = () => {
   const user = {
@@ -18,93 +18,100 @@ const Profile = () => {
     email: { emailAddress: "jumajosephat61@gmail.com" },
     userName: "JuJosephat",
   };
-  const theme = useTheme();
+  const { colors } = useTheme();
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.profileSection}>
-        <Card style={styles.card}>
-          <Card.Content>
-            <View>
-              <Avatar.Image
-                source={{
-                  uri: "https://via.placeholder.com/200x200",
-                }}
-                size={120}
-                style={styles.avatar}
-              />
-              <IconButton
-                icon="camera"
-                iconColor="#fff"
-                size={40}
-                onPress={() => {}}
-                style={styles.cameraIcon}
-              />
-            </View>
-            <Text style={styles.name}>{user?.name || "User Name"}</Text>
-            <Text style={styles.role}>Full Stack Developer</Text>
-            <Button mode="outlined" style={styles.button} onPress={() => {}}>
-              Follow
-            </Button>
-            <Button mode="contained" style={styles.button} onPress={() => {}}>
-              Message
-            </Button>
-          </Card.Content>
-        </Card>
-      </View>
+    <View className="flex-1">
+      <Header title={"Profile"} />
+      <ScrollView style={{ flex: 1 }}>
+        <View style={styles.profileSection}>
+          <Card style={[styles.card, { backgroundColor: colors.background }]}>
+            <Card.Content>
+              <View>
+                <Avatar.Image
+                  source={{
+                    uri: "https://via.placeholder.com/200x200",
+                  }}
+                  size={120}
+                  style={styles.avatar}
+                />
+                <IconButton
+                  icon="camera"
+                  iconColor="#fff"
+                  size={40}
+                  onPress={() => {}}
+                  style={styles.cameraIcon}
+                />
+              </View>
+              <Text style={styles.name}>{user?.name || "User Name"}</Text>
+              <Text style={styles.role}>Full Stack Developer</Text>
+              <Button mode="outlined" style={styles.button} onPress={() => {}}>
+                Follow
+              </Button>
+              <Button mode="contained" style={styles.button} onPress={() => {}}>
+                Message
+              </Button>
+            </Card.Content>
+          </Card>
+        </View>
 
-      <View style={styles.detailsSection}>
-        <Card style={styles.card}>
-          <Card.Content>
-            <Text style={styles.sectionTitle}>About Me</Text>
-            <Text style={styles.bodyText}>
-              {user?.about || "Add about you"}
-            </Text>
-            <TextInput
-              label="Email"
-              value={user?.email?.emailAddress || ""}
-              mode="flat"
-              style={styles.input}
-              disabled
-            />
-            <TextInput
-              label="Username"
-              value={`@${user?.userName}` || ""}
-              mode="flat"
-              style={styles.input}
-              disabled
-            />
-          </Card.Content>
-        </Card>
+        <View style={styles.detailsSection}>
+          <Card style={[styles.card, { backgroundColor: colors.background }]}>
+            <Card.Content>
+              <Text style={styles.sectionTitle}>About Me</Text>
+              <Text style={styles.bodyText}>
+                {user?.about || "Add about you"}
+              </Text>
+              <TextInput
+                label="Email"
+                value={user?.email?.emailAddress || ""}
+                mode="flat"
+                style={styles.input}
+                disabled
+              />
+              <TextInput
+                label="Username"
+                value={`@${user?.userName}` || ""}
+                mode="flat"
+                style={styles.input}
+                disabled
+              />
+            </Card.Content>
+          </Card>
 
-        <Card style={[styles.card, styles.companyCard]}>
-          <Card.Content>
-            <Text style={styles.sectionTitle}>Company</Text>
-            <Text style={styles.companyName}>
-              {user?.company?.name || "Add company details"}
-            </Text>
-            <Button mode="outlined" style={styles.button} onPress={() => {}}>
-              Edit
-            </Button>
-          </Card.Content>
-        </Card>
-      </View>
-    </ScrollView>
+          <Card
+            style={[
+              styles.card,
+              styles.companyCard,
+              { backgroundColor: colors.background },
+            ]}
+          >
+            <Card.Content>
+              <Text style={styles.sectionTitle}>Company</Text>
+              <Text style={styles.companyName}>
+                {user?.company?.name || "Add company details"}
+              </Text>
+              <Button mode="outlined" style={styles.button} onPress={() => {}}>
+                Edit
+              </Button>
+            </Card.Content>
+          </Card>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
     padding: 16,
     paddingVertical: 25,
   },
-  profileSection: {
-    marginBottom: 16,
-  },
+  profileSection: {},
   card: {
     padding: 16,
+    borderRadius: 0,
   },
   avatar: {
     alignSelf: "center",
@@ -133,7 +140,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   detailsSection: {
-    marginTop: 16,
+    marginTop: 2,
   },
   sectionTitle: {
     fontSize: 18,
@@ -149,7 +156,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   companyCard: {
-    marginTop: 16,
+    marginTop: 2,
   },
   companyName: {
     fontSize: 16,
