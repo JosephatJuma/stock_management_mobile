@@ -2,11 +2,11 @@ import { TextInput, HelperText } from "react-native-paper";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Keyboard } from "react-native";
-const InputField = (props) => {
+const InputField = (props: any) => {
   const [showPass, setShowPass] = useState(true);
-  const { theme } = useSelector((state) => state.theme.theme);
+  const { theme } = useSelector((state: any) => state.theme);
 
-  const renderError = (error) => {
+  const renderError = (error: any) => {
     return (
       <>
         {error && (
@@ -21,7 +21,6 @@ const InputField = (props) => {
   return (
     <>
       <TextInput
-        className="m-4 bg-gray-100 font-bold text-gray-500"
         label={props.label}
         placeholder={props.placeholder}
         value={props.value}
@@ -79,7 +78,7 @@ const InputField = (props) => {
           backgroundColor:
             theme === "dark"
               ? "rgba(0, 0, 0, 0.5)"
-              : "rgba(252, 240, 240, 0.8)",
+              : "rgba(240, 232, 232, 0.8)",
           fontWeight: "600",
           fontSize: 18,
         }}
@@ -88,10 +87,6 @@ const InputField = (props) => {
         editable={props.editable}
         placeholderTextColor={"gray"}
         activeOutlineColor="#004AAD"
-        theme={{
-          colors: { primary: theme === "dark" ? "#fff" : "#004AAD" },
-          borderRadius: 8,
-        }}
         keyboardType={props.keyboardType}
         outlineStyle={{ borderRadius: 8, borderColor: "#e5e7eb" }}
       />
