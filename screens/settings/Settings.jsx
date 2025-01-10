@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import React from "react";
 import { Appbar, List, RadioButton, useTheme } from "react-native-paper";
 import { Header } from "../../micro-components";
@@ -43,15 +43,26 @@ const Settings = () => {
       icon: "bell",
       action: () => {},
     },
+  ];
+  const danderZoneOptions = [
     {
-      label: "Security Questions",
-      description: "Security questions for account recovery",
-      icon: "fingerprint",
+      label: "Delete Account",
+      icon: "account-off",
+      description: "Permanently delete your account",
+      action: () => {},
+    },
+    {
+      label: "Temporary Delete Account",
+      icon: "account-off",
+      description: "Permanently delete your account",
       action: () => {},
     },
   ];
   return (
-    <View className="flex-1 " style={{ backgroundColor: colors.background }}>
+    <ScrollView
+      className="flex-1 "
+      contentContainerStyle={{ backgroundColor: colors.background }}
+    >
       <Header title={"Settings"}>
         <Appbar.Action icon="cog" />
       </Header>
@@ -85,7 +96,20 @@ const Settings = () => {
           />
         ))}
       </List.Section>
-    </View>
+
+      <List.Section title="Dander Zone">
+        {danderZoneOptions.map((item, index) => (
+          <List.Item
+            key={index}
+            title={item.label}
+            description={item.description}
+            onPress={item.action}
+            left={(props) => <List.Icon {...props} icon={item.icon} />}
+            right={(props) => <List.Icon {...props} icon="chevron-right" />}
+          />
+        ))}
+      </List.Section>
+    </ScrollView>
   );
 };
 

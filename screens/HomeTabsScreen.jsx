@@ -4,31 +4,81 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import HomeScreen from "./home/HomeScreen";
 import { useSelector, useDispatch } from "react-redux";
-
+import { BackHandler, Alert } from "react-native";
 import io from "socket.io-client";
+import Settings from "./settings/Settings";
 import {
   Entypo,
   FontAwesome5,
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
+  Fontisto,
 } from "@expo/vector-icons";
 import Messages from "./messages/Messages";
 import Vibes from "./vibes/Vibes";
 import Profile from "./profile/Profile";
 import { TouchableRipple } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
-import { useTheme } from "react-native-paper";
+import { useTheme, Avatar } from "react-native-paper";
 const Tab = createBottomTabNavigator();
 
 const HomeTabsScreen = () => {
   const { colors } = useTheme();
   const [newMessages, setNewMessages] = useState([]);
+  const navigation = useNavigation();
 
   const MessagesTab = () => {
     return <Messages />;
   };
   //initializeDatabase().catch((error) => setConnectionError(error?.message));
+
+  useEffect(() => {
+    //confirm if user wants to exit
+    const backAction = () => {
+      const state = navigation.getState();
+      if (state.routes[state.index].state) {
+        if (state.routes[state.index].state.index > 0) {
+          //there are more screens in stack
+          navigation.goBack();
+          return true;
+        }
+        //no more screens in stack
+        Alert.alert(
+          "Hold on!",
+          "Are you sure you want to exit Stylishy?",
+
+          [
+            {
+              text: "Cancel",
+              onPress: () => null,
+              style: "cancel",
+            },
+            {
+              text: "YES",
+              onPress: () => BackHandler.exitApp(),
+              style: "destructive",
+            },
+          ],
+          {
+            cancelable: false,
+            userInterfaceStyle: "light",
+          }
+        );
+        return true;
+      }
+
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, [navigation]);
   return (
     <Tab.Navigator
       inactiveColor="gray"
@@ -37,44 +87,44 @@ const HomeTabsScreen = () => {
         headerShown: false,
         tabBarAndroidRipple: { borderless: true },
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
           if (route.name === "Home")
+            return <Fontisto name="nursing-home" size={24} color={color} />;
+          else if (route.name === "Products") {
             return (
-              <MaterialCommunityIcons name={"home"} size={25} color={color} />
-            );
-          else if (route.name === "Vybes") {
-            return (
-              <MaterialCommunityIcons
-                name="party-popper"
-                size={24}
-                color={color}
-              />
+              <MaterialCommunityIcons name="store" size={24} color={color} />
             );
           } else if (route.name === "Profile") {
             return (
-              <MaterialIcons name="account-circle" size={24} color={color} />
+              <Avatar.Image
+                source={{
+                  uri: "https://htmlstream.com/preview/unify-v2.6/assets/img-temp/400x450/img5.jpg",
+                }}
+                size={35}
+                style={{ backgroundColor: color }}
+              />
             );
-          } else if (route.name === "Messages") {
-            return <Ionicons name="chatbubbles" size={24} color={color} />;
+          } else if (route.name === "Sales") {
+            return (
+              <MaterialCommunityIcons name="sale" size={24} color={color} />
+            );
+          } else if (route.name === "Settings") {
+            return <Ionicons name="cog" size={24} color={color} />;
+          } else if (route.name === "Categories") {
+            return <MaterialIcons name="category" size={24} color={color} />;
           }
         },
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: "gray",
 
         tabBarLabelStyle: {
-          fontSize: 16,
+          fontSize: 14,
           textTransform: "capitalize",
           fontWeight: "700",
         },
-        tabBarBadge:
-          route.name === "Messages"
-            ? newMessages.length > 0
-              ? newMessages.length
-              : 10
-            : null,
+
         tabBarBadgeStyle: { backgroundColor: colors.elevation.level5 },
         tabBarStyle: {
-          height: 60,
+          height: 65,
           backgroundColor: colors.background,
         },
 
@@ -88,8 +138,9 @@ const HomeTabsScreen = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Vybes" component={Vibes} />
-      <Tab.Screen name="Messages" component={MessagesTab} />
+      <Tab.Screen name="Categories" component={Vibes} />
+      <Tab.Screen name="Products" component={MessagesTab} />
+      <Tab.Screen name="Sales" component={MessagesTab} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
