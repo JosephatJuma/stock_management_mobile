@@ -9,7 +9,7 @@ export default function App() {
   const { colors } = useTheme();
   const { theme } = useSelector((state) => state.theme);
   const handleSetNavigationColor = async () => {
-    await NavigationBar.setBackgroundColorAsync(colors.background);
+    await NavigationBar.setBackgroundColorAsync(colors.elevation.level2);
   };
   useEffect(() => {
     handleSetNavigationColor();
