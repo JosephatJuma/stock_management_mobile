@@ -18,9 +18,7 @@ export default function LoginScreen() {
     <ScrollView
       contentContainerStyle={[
         styles.container,
-        {
-          backgroundColor: colors.background,
-        },
+        { backgroundColor: colors.background },
       ]}
     >
       <Avatar.Icon
@@ -63,6 +61,7 @@ export default function LoginScreen() {
               onChange={(value) => setFieldValue("password", value)}
               placeholder="Enter your password"
             />
+
             <View style={styles.checkboxContainer}>
               <Checkbox.Item
                 label="Remember me"
@@ -97,12 +96,11 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 16,
     paddingVertical: 20,
-    backgroundColor: "red",
+    flex: 1,
   },
   avatar: {
     marginBottom: 16,
