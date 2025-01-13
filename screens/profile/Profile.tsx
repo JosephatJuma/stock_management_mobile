@@ -8,21 +8,43 @@ import {
   TextInput,
   IconButton,
   useTheme,
+  List,
+  RadioButton,
 } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { Header } from "../../micro-components";
+import useAppTheme from "../../hooks/useAppTheme";
 
 const Profile = () => {
-  const user = {
+  const user: any = {
     name: "Josephat Juma",
     email: { emailAddress: "jumajosephat61@gmail.com" },
     userName: "JuJosephat",
   };
   const { colors } = useTheme();
+  const { handleChangeTheme } = useAppTheme();
+  const { theme } = useSelector((state: any) => state.theme);
+
+  const themeOptions = [
+    {
+      label: "Light",
+      description: "Changing theme to light",
+      icon: "brightness-7",
+      value: "light",
+      action: () => {},
+    },
+    {
+      label: "Dark",
+      description: "Changing theme to dark",
+      icon: "brightness-2",
+      value: "dark",
+      action: () => {},
+    },
+  ];
 
   return (
     <View className="flex-1">
-      <Header title={"Profile"} />
+      <Header title={"Settings/Profile"} />
       <ScrollView style={{ flex: 1 }}>
         <View style={styles.profileSection}>
           <Card style={[styles.card, { backgroundColor: colors.background }]}>
@@ -97,6 +119,36 @@ const Profile = () => {
             </Card.Content>
           </Card>
         </View>
+        <View style={styles.detailsSection}>
+          <Card
+            style={[
+              styles.card,
+              styles.companyCard,
+              { backgroundColor: colors.background },
+            ]}
+          >
+            <Card.Content>
+              <Text style={styles.sectionTitle}>Theme</Text>
+              {themeOptions.map((item, index) => (
+                <List.Item
+                  key={index}
+                  title={item.label}
+                  description={item.description}
+                  //onPress={item.action}
+                  left={(props) => <List.Icon {...props} icon={item.icon} />}
+                  right={(props) => (
+                    <RadioButton
+                      {...props}
+                      value={theme}
+                      status={theme === item.value ? "checked" : "unchecked"}
+                      onPress={() => handleChangeTheme(item.value)}
+                    />
+                  )}
+                />
+              ))}
+            </Card.Content>
+          </Card>
+        </View>
       </ScrollView>
     </View>
   );
@@ -166,3 +218,4 @@ const styles = StyleSheet.create({
 });
 
 export default Profile;
+// 30a286c6d79d
