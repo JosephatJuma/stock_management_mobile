@@ -8,7 +8,6 @@ import {
   CardStyleInterpolators,
 } from "@react-navigation/stack";
 const Stack = createStackNavigator();
-import Settings from "./screens/settings/Settings";
 import { useSelector, useDispatch } from "react-redux";
 import HomeTabsScreen from "./screens/HomeTabsScreen";
 import LoginScreen from "./screens/auth/LoginScreen";
@@ -31,7 +30,6 @@ const Routes = () => {
         <Stack.Screen name="OnBoarding" component={OnBoardingScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="HomeTabs" component={HomeTabsScreen} />
-        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   );
