@@ -78,16 +78,6 @@ const HomeTabsScreen = () => {
             return (
               <MaterialCommunityIcons name="store" size={24} color={color} />
             );
-          } else if (route.name === "Profile") {
-            return (
-              <Avatar.Image
-                source={{
-                  uri: "https://htmlstream.com/preview/unify-v2.6/assets/img-temp/400x450/img5.jpg",
-                }}
-                size={35}
-                style={{ backgroundColor: color }}
-              />
-            );
           } else if (route.name === "Sales") {
             return (
               <MaterialCommunityIcons name="sale" size={24} color={color} />
@@ -104,7 +94,7 @@ const HomeTabsScreen = () => {
       <Tab.Screen name="Categories" component={Vibes} />
       <Tab.Screen name="Products" component={Messages} />
       <Tab.Screen name="Sales" component={Messages} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Settings" component={Profile} />
     </Tab.Navigator>
   );
 };

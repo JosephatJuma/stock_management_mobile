@@ -1,6 +1,5 @@
 import { View, Dimensions } from "react-native";
 import React, { useState, useEffect } from "react";
-
 import { Appbar, Card, Text, useTheme, Icon } from "react-native-paper";
 import numbro from "numbro";
 import { useNavigation } from "@react-navigation/native";
@@ -142,12 +141,9 @@ const HomeScreen = () => {
           titleStyle={{ fontWeight: "bold" }}
         />
 
-        <Appbar.Action icon="bell" onPress={() => console.log("Pressed")} />
-        <Appbar.Action
-          icon="cog"
-          onPress={() => navigation.navigate("Settings")}
-        />
-        <Appbar.Action icon="chat" onPress={() => console.log("Pressed")} />
+        <Appbar.Action icon="sale" onPress={() => console.log("Pressed")} />
+
+        <Appbar.Action icon="plus" onPress={() => console.log("Pressed")} />
       </Appbar.Header>
       <ScrollView>
         <FlashList
@@ -162,22 +158,9 @@ const HomeScreen = () => {
           data={cardItems}
           renderItem={({ item }) => <CardContent item={item} />}
           numColumns={2}
-          contentContainerStyle={{ width: "100%", paddingBottom: 20 }}
+          //contentContainerStyle={{ width: "100%", paddingBottom: 20 }}
           ListFooterComponent={
-            <View>
-              {/* <PieChart
-                data={data1}
-                width={screenWidth / 1.2}
-                height={200}
-                chartConfig={chartConfig}
-                accessor={"population"}
-                backgroundColor={"transparent"}
-                paddingLeft={"0"}
-                center={[1, 50]}
-                style={{
-                  margin: 10,
-                }}
-              /> */}
+            <View className="flex-1">
               <LineChart
                 data={data}
                 width={screenWidth}
@@ -189,6 +172,23 @@ const HomeScreen = () => {
             </View>
           }
         />
+        {/* <View style={{ margin: 20, width: "100%", height: "50%" }}>
+                <PieChart
+                  data={data1}
+                  width={screenWidth}
+                  height={200}
+                  chartConfig={chartConfig}
+                  accessor={"population"}
+                  absolute={false}
+                  avoidFalseZero={false}
+                  backgroundColor={"transparent"}
+                  paddingLeft={"0"}
+                  center={[20, 50]}
+                  style={{
+                    margin: 10,
+                  }}
+                />
+              </View> */}
       </ScrollView>
     </View>
   );
