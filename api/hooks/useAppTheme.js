@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { setTheme } from "../store/slices/theme.slice";
+import { setTheme } from "../../store/slices/theme.slice";
 import { useTheme } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
