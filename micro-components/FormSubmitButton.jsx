@@ -1,7 +1,6 @@
 import { View, Text } from "react-native";
 import React from "react";
 import { Button, useTheme } from "react-native-paper";
-import useAppTheme from "../hooks/useAppTheme";
 
 export default function FormSubmitButton({
   title,

@@ -13,7 +13,7 @@ import {
 } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { Header } from "../../micro-components";
-import useAppTheme from "../../hooks/useAppTheme";
+import useAppTheme from "../../api/hooks/useAppTheme";
 
 const Profile = () => {
   const user: any = {
